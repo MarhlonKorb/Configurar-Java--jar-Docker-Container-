@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: gerenciador_estacionamento
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: master
+    ports:
+      - "5432:5432"
+    networks:
+      - minha-rede-docker
+
+  java-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - minha-rede-docker
+    depends_on:
+      - postgres
+
+networks:
+  minha-rede-docker:
+    driver: bridge
