@@ -1,4 +1,4 @@
-# Passos para gerar o JAR e subir o Docker:
+# Passos para gerar o JAR e subir o container:
 
 1 - Executar o build da aplicação para gerar arquivo .jar
 
@@ -46,13 +46,13 @@ FROM azul/zulu-openjdk:21.0.1
 RUN mkdir /app
 
 # Copie o JAR construído para o diretório de aplicativos na imagem
-COPY target/gerenciador-estacionamento-0.0.1-SNAPSHOT.jar /app/gerenciador-estacionamento.jar
+COPY target/gerenciador-estacionamento-0.0.1-SNAPSHOT.jar /app/sua-aplicacao.jar
 
 # Configure o diretório de trabalho
 WORKDIR /app
 
 # Adicione um tempo de espera de 30 segundos (ou o valor que você considerar apropriado)
-CMD ["java", "-jar", "gerenciador-estacionamento.jar"]
+CMD ["java", "-jar", "sua-aplicacao.jar"]
 ```
 
 
@@ -66,7 +66,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: gerenciador_estacionamento
+      POSTGRES_DB: nome_do_banco
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: master
     ports:
